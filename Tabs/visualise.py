@@ -54,12 +54,23 @@ def app(x, y, df):
         residuals = np.array(measurements) - trendline
         s_res = np.sqrt(np.mean(residuals ** 2))
 
+        ### PERHITUNGAN R-SQUARE ###
+        # Total Sum of Squares (SS_tot)
+        ss_tot = np.sum((np.array(measurements) - np.mean(measurements)) ** 2)
+        
+        # Residual Sum of Squares (SS_res)
+        ss_res = np.sum((np.array(measurements) - trendline) ** 2)
+        
+        # Kalkulasi R-square
+        r_square = 1 - (ss_res / ss_tot)
+
         ### MENAMPILKAN HASIL KALKULASI ###
         st.subheader("Hasil Kalkulasi:")
         st.write(f"**Mean Bias:** {mean_bias:.2f}%")
         st.write(f"**Regression Line Slope:** {coefficients[0]:.3f}")
         st.write(f"**A_rms (Root Mean Square Error):** {arms:.2f}%")
         st.write(f"**s_res (Residual Standard Deviation):** {s_res:.2f}%")
+        st.write(f"**R-square (R²):** {r_square:.3f}")
         
         # Menampilkan perbandingan dengan base case
         st.subheader("Perbandingan dengan Base Case:")
